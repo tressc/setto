@@ -1,6 +1,8 @@
 extends Node2D
 
+
 var Space = preload("res://space.tscn")
+
 
 var rng = RandomNumberGenerator.new()
 var scoring: Dictionary = {
@@ -31,8 +33,10 @@ var current_card = null
 var legal_moves: Array = []
 var spaces = []
 
+
 func _ready():
 	new_game()
+
 
 func new_game() -> void:
 	generate_cards()
@@ -42,6 +46,7 @@ func new_game() -> void:
 
 func update_pos(pos: int) -> void:
 	remove_card(pos)
+	unhighlight_spaces(pos)
 	current_card = board_state[pos]
 	turn += 1
 	for score in scoring[pos]:
@@ -61,8 +66,9 @@ func generate_cards() -> void:
 
 
 func generate_board() -> void:
-	for i in range(16):
+	while len(game_state) < 19:
 		game_state.append(0)
+	for i in range(16):
 		var rand: int = rng.randi_range(0, len(cards) - 1)
 		var card: String = cards[rand]
 		var suit: String = card[0]
@@ -75,8 +81,11 @@ func generate_board() -> void:
 			"cxns": [],
 		}
 		var space = Space.instance()
-		space.init(card)
-		spaces.append(card)
+		space.init(card, i)
+		space.connect("enter_hover", self, "highlight_spaces")
+		space.connect("leave_hover", self, "unhighlight_spaces")
+		space.connect("make_move", self, "update_pos")
+		spaces.append(space)
 		$CenterContainer/GridContainer.add_child(space)
 		
 		cards.erase(card)
@@ -121,6 +130,23 @@ func set_legal_moves() -> void:
 		legal_moves = board_state.keys()
 		return
 	legal_moves = current_card.cxns
+	update_legal_spaces()
+
+
+func disable_illegal_spaces() -> void:
+	for i in range(len(spaces)):
+		if not legal_moves.has(i):
+			spaces[i].become_illegal()
+
+
+func enable_legal_spaces() -> void:
+	for i in legal_moves:
+		spaces[i].become_legal()
+
+
+func update_legal_spaces() -> void:
+	disable_illegal_spaces()
+	enable_legal_spaces()
 
 
 func check_for_win(value: int) -> void:
@@ -130,3 +156,15 @@ func check_for_win(value: int) -> void:
 
 func initiate_game_end(winner: int) -> void:
 	pass
+
+
+func highlight_spaces(pos) -> void:
+	var cxns: Array = board_state[pos].cxns
+	for cxn in cxns:
+		spaces[cxn].start_highlight()
+
+
+func unhighlight_spaces(pos) -> void:
+	var cxns: Array = board_state[pos].cxns
+	for cxn in cxns:
+		spaces[cxn].end_highlight()

@@ -18,6 +18,7 @@ position = Vector2( 12.8067, 12.8067 )
 scale = Vector2( 2.19715, 2.19715 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2( 3.27394, 3.27395 )
 z_index = 1
 shape = SubResource( 1 )
@@ -30,6 +31,19 @@ margin_right = 44.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( -108, 0 )
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 44.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( -108, 0 )
+mouse_filter = 2
+color = Color( 0.14902, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -57,5 +71,6 @@ texture = ExtResource( 1 )
 vframes = 4
 hframes = 5
 frame = 4
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
