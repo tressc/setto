@@ -28,6 +28,10 @@ func end_highlight() -> void:
 	$Highlight.hide()
 
 
+func end_hover() -> void:
+	$Hover.hide()
+
+
 func become_illegal() -> void:
 	if not occupied:
 		legal = false
@@ -38,6 +42,15 @@ func become_illegal() -> void:
 func become_legal() -> void:
 	legal = true
 	modulate.a = 1
+
+
+func show_coin(current_player: int) -> void:
+	if current_player == 1:
+		$Sprite3.show()
+		$Sprite3/AnimationPlayer.play("spin")
+	elif current_player == -1:
+		$Sprite4/AnimationPlayer.play("spin")
+		$Sprite4.show()
 
 
 func _on_Area2D_mouse_entered() -> void:
@@ -52,8 +65,7 @@ func _on_Area2D_mouse_exited():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if legal:
+	if legal and not occupied:
 		if (event is InputEventMouseButton && event.pressed):
-			modulate.a = 0
 			occupied = true
 			emit_signal("make_move", my_pos)

@@ -47,6 +47,7 @@ func new_game() -> void:
 func update_pos(pos: int) -> void:
 	remove_card(pos)
 	unhighlight_spaces(pos)
+	spaces[pos].show_coin(current_player)
 	current_card = board_state[pos]
 	turn += 1
 	for score in scoring[pos]:
@@ -151,11 +152,14 @@ func update_legal_spaces() -> void:
 
 func check_for_win(value: int) -> void:
 	if abs(value) == 4:
-		initiate_game_end(value)
+		initiate_game_end(sign(value))
 
 
 func initiate_game_end(winner: int) -> void:
-	pass
+	if winner == 1:
+		print("Player 1 wins!")
+	elif winner == -1:
+		print("Player 2 wins!")
 
 
 func highlight_spaces(pos) -> void:
@@ -165,6 +169,7 @@ func highlight_spaces(pos) -> void:
 
 
 func unhighlight_spaces(pos) -> void:
+	spaces[pos].end_hover()
 	var cxns: Array = board_state[pos].cxns
 	for cxn in cxns:
 		spaces[cxn].end_highlight()

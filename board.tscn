@@ -6,19 +6,21 @@
 script = ExtResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_top = 1.04932
-margin_right = 1024.0
-margin_bottom = 601.049
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 640.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 320, 180 )
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="CenterContainer"]
-margin_left = 512.0
-margin_top = 299.0
-margin_right = 512.0
-margin_bottom = 299.0
+margin_left = 320.0
+margin_top = 180.0
+margin_right = 320.0
+margin_bottom = 180.0
 mouse_filter = 2
 custom_constants/vseparation = 50
 custom_constants/hseparation = 50
