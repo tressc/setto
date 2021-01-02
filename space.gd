@@ -8,7 +8,7 @@ signal make_move(pos)
 
 var cards: Array = ["a", "b", "c", "d"]
 var my_pos: int = 0
-var legal: bool = true
+export var legal: bool = true
 var occupied: bool = false
 
 
@@ -16,8 +16,8 @@ func init(card: String, pos: int):
 	var row: int = cards.find(card[0])
 	var col: int = len(card)
 	my_pos = pos
-	$Sprite.frame_coords = Vector2(0, row)
-	$Sprite2.frame_coords = Vector2(col, row)
+	$Shape.frame_coords = Vector2(0, row)
+	$Num.frame_coords = Vector2(col, row)
 
 
 func start_highlight() -> void:
@@ -46,11 +46,17 @@ func become_legal() -> void:
 
 func show_coin(current_player: int) -> void:
 	if current_player == 1:
-		$Sprite3.show()
-		$Sprite3/AnimationPlayer.play("spin")
+		$White.show()
+		$WhiteTurn.show()
 	elif current_player == -1:
-		$Sprite4/AnimationPlayer.play("spin")
-		$Sprite4.show()
+		$Background.hide()
+		$BlackTurn.show()
+		$Black.show()
+
+
+func hide_turn() -> void:
+	$WhiteTurn.hide()
+	$BlackTurn.hide()
 
 
 func _on_Area2D_mouse_entered() -> void:
@@ -68,4 +74,5 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	if legal and not occupied:
 		if (event is InputEventMouseButton && event.pressed):
 			occupied = true
+			legal = false
 			emit_signal("make_move", my_pos)

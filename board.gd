@@ -48,7 +48,11 @@ func update_pos(pos: int) -> void:
 	remove_card(pos)
 	unhighlight_spaces(pos)
 	spaces[pos].show_coin(current_player)
+	if turn > 1:
+		spaces[current_card.pos].hide_turn()
 	current_card = board_state[pos]
+	$CurrentCard.init(current_card.card, 0)
+	$CurrentCard.show()
 	turn += 1
 	for score in scoring[pos]:
 		game_state[score] += current_player
@@ -80,6 +84,7 @@ func generate_board() -> void:
 		board_state[i] = {
 			"card": card,
 			"cxns": [],
+			"pos": i
 		}
 		var space = Space.instance()
 		space.init(card, i)

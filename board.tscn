@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://space.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board.gd" type="Script" id=2]
 
 [node name="board" type="Node2D"]
@@ -28,3 +29,12 @@ columns = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CurrentCard" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_left = 481.325
+margin_top = 51.6106
+margin_right = 481.325
+margin_bottom = 51.6106
+rect_scale = Vector2( 2, 2 )
+legal = false

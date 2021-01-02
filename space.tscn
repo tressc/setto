@@ -2,45 +2,13 @@
 
 [ext_resource path="res://sprites.png" type="Texture" id=1]
 [ext_resource path="res://space.gd" type="Script" id=2]
-[ext_resource path="res://coin.png" type="Texture" id=3]
-[ext_resource path="res://coin2.png" type="Texture" id=4]
+[ext_resource path="res://white_turn.png" type="Texture" id=3]
+[ext_resource path="res://black_turn.png" type="Texture" id=4]
+[ext_resource path="res://black.png" type="Texture" id=5]
+[ext_resource path="res://white.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.10268, 9.10273 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "spin"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0, 1, 2, 3, 4, 5 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "spin"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
-}
 
 [node name="space" type="Control"]
 mouse_filter = 2
@@ -84,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
@@ -93,14 +61,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Shape" type="Sprite" parent="."]
 position = Vector2( 12.8067, 12.8067 )
 scale = Vector2( 2.19715, 2.19715 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 5
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="Num" type="Sprite" parent="."]
 position = Vector2( 31.8496, 31.8496 )
 scale = Vector2( 1.50113, 1.50113 )
 texture = ExtResource( 1 )
@@ -108,26 +76,29 @@ vframes = 4
 hframes = 5
 frame = 4
 
-[node name="Sprite3" type="Sprite" parent="."]
+[node name="White" type="Sprite" parent="."]
 visible = false
 position = Vector2( 20, 20 )
-scale = Vector2( 5, 5 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 6 )
+
+[node name="Black" type="Sprite" parent="."]
+visible = false
+position = Vector2( 20, 20 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 5 )
+
+[node name="WhiteTurn" type="Sprite" parent="."]
+visible = false
+position = Vector2( 20, 20 )
+scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 3 )
-hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3"]
-anims/spin = SubResource( 2 )
-
-[node name="Sprite4" type="Sprite" parent="."]
+[node name="BlackTurn" type="Sprite" parent="."]
 visible = false
 position = Vector2( 20, 20 )
-scale = Vector2( 5, 5 )
+scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 4 )
-hframes = 6
-frame = 5
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite4"]
-anims/spin = SubResource( 3 )
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
