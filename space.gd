@@ -62,6 +62,7 @@ func hide_turn() -> void:
 func _on_Area2D_mouse_entered() -> void:
 	if legal:
 		emit_signal("enter_hover", my_pos)
+		$AudioStreamPlayer.play()
 		$Hover.show()
 
 
@@ -73,6 +74,7 @@ func _on_Area2D_mouse_exited():
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if legal and not occupied:
 		if (event is InputEventMouseButton && event.pressed):
+			$AudioStreamPlayer2.play()
 			occupied = true
 			legal = false
 			emit_signal("make_move", my_pos)
