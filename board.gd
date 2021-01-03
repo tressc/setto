@@ -54,11 +54,13 @@ func update_pos(pos: int) -> void:
 	$CurrentCard.init(current_card.card, 0)
 	$CurrentCard.show()
 	turn += 1
+	set_legal_moves()
 	for score in scoring[pos]:
 		game_state[score] += current_player
-		check_for_win(game_state[score])
+		if check_for_win(game_state[score]):
+			return
 	current_player = current_player * -1
-	set_legal_moves()
+	
 
 
 func generate_cards() -> void:
@@ -155,9 +157,14 @@ func update_legal_spaces() -> void:
 	enable_legal_spaces()
 
 
-func check_for_win(value: int) -> void:
+func check_for_win(value: int) -> bool:
 	if abs(value) == 4:
 		initiate_game_end(sign(value))
+		return true
+	elif legal_moves.empty():
+		initiate_game_end(current_player)
+		return true
+	return false
 
 
 func initiate_game_end(winner: int) -> void:

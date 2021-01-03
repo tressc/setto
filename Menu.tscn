@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SceneChangeButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menu.gd" type="Script" id=2]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 255.0
+margin_top = 155.0
+margin_right = 255.0
+margin_bottom = 205.0
+mouse_filter = 2
+custom_constants/vseparation = 50
+custom_constants/hseparation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SceneChangeButton" parent="GridContainer" instance=ExtResource( 1 )]
+scene_path = "res://board.tscn"
+button_text = "new game"
+
+[node name="SceneChangeButton2" parent="GridContainer" instance=ExtResource( 1 )]
+margin_top = 50.0
+margin_bottom = 50.0
+scene_path = "res://board.tscn"
+button_text = "options"

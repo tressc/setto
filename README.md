@@ -8,7 +8,8 @@ Setto is a matching game where two players compete to arrange four of their toke
 
 On the first turn you can play your token on any space. On each subsequent turn you must place your token on a space matching either the symbol or number of the space previously chosen by your opponent.
 
-The first player to arrange four of their tokens in a square or along a row, column, or diagonal wins!
+The first player to arrange four of their tokens in a square or along a row, column, or diagonal wins! Likewise, you also win if your opponent has no legal moves on their turn.
+
 
 ## Features
 
