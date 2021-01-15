@@ -61,17 +61,19 @@ func hide_turn() -> void:
 
 func _on_Area2D_mouse_entered() -> void:
 	if legal:
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 		emit_signal("enter_hover", my_pos)
 		$AudioStreamPlayer.play()
 		$Hover.show()
 
 
 func _on_Area2D_mouse_exited():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	emit_signal("leave_hover", my_pos)
 	$Hover.hide()
 
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
+func _on_Area2D_input_event(_viewport, event, _shape_idx):
 	if legal and not occupied:
 		if (event is InputEventMouseButton && event.pressed):
 			$AudioStreamPlayer2.play()
