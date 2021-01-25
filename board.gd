@@ -185,3 +185,8 @@ func unhighlight_spaces(pos) -> void:
 	var cxns: Array = board_state[pos].cxns
 	for cxn in cxns:
 		spaces[cxn].end_highlight()
+
+
+func _on_Button_pressed():
+	get_tree().paused = true
+	$Pause.show()

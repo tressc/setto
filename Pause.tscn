@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Pause.gd" type="Script" id=2]
+
+[node name="Pause" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0, 0, 0, 0.788235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="ColorRect"]
+margin_left = 260.0
+margin_top = 148.0
+margin_right = 320.0
+margin_bottom = 164.0
+rect_scale = Vector2( 1.5, 1.5 )
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+text = "continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="ColorRect"]
+margin_left = 260.0
+margin_top = 184.0
+margin_right = 320.0
+margin_bottom = 200.0
+rect_scale = Vector2( 1.5, 1.5 )
+mouse_default_cursor_shape = 2
+theme = ExtResource( 1 )
+text = "quit"
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="ColorRect/Button2" to="." method="_on_Button2_pressed"]
